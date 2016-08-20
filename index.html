@@ -34,6 +34,8 @@
       -->
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="app.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
     <script src="http://s.cdpn.io/25480/OrbitControls.js"></script>
 
@@ -48,13 +50,13 @@
     function init() {
     // Create the scene and set the scene size.
     scene = new THREE.Scene();
-    var WIDTH = 400,
-        HEIGHT = 300;
+    var WIDTH = $('.content').width(),
+        HEIGHT = $('.content').height();
 
     // Create a renderer and add it to the DOM.
     renderer = new THREE.WebGLRenderer({antialias:true});
     renderer.setSize(WIDTH, HEIGHT);
-    document.body.appendChild(renderer.domElement);
+    $('.content').append(renderer.domElement);
     renderer.domElement.id = "context"
 
     // Create a camera, zoom it out from the model a bit, and add it to the scene.
@@ -69,7 +71,7 @@
 
     // Add a white PointLight to the scene.
     var loader = new THREE.JSONLoader();
-    loader.load( 'cup.json', function(geometry){
+    loader.load( 'http://codepen.io/nickpettit/pen/nqyaK.js', function(geometry){
       var material = new THREE.MeshLambertMaterial({color: 0x55B663});
       mesh = new THREE.Mesh( geometry, material);
       scene.add(mesh);
@@ -86,7 +88,5 @@
     controls.update();
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="app.js"></script>
   </body>
 </html>
