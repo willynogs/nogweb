@@ -55,7 +55,7 @@
 
       loader = new THREE.JSONLoader();
 
-      loader.load( "cup.js", function( geometry ) {
+      loader.load( "cup.json", function( geometry ) {
         mesh = new THREE.Mesh( geometry, new THREE.MeshNormalMaterial() );
         mesh.scale.set( 10, 10, 10 );
         mesh.position.y = 150;
