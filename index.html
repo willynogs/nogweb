@@ -44,7 +44,7 @@
       var camera, scene, renderer, mesh, loader;
 
       init();
-      animate();
+
 
       function init() {
 
@@ -76,15 +76,6 @@
 
       document.body.appendChild( renderer.domElement );
 
-      }
-
-      function animate() {
-
-      requestAnimationFrame( animate );
-
-      mesh.rotation.x += 0.05;
-
-      renderer.render( scene, camera );
       }
 
     		</script>
