@@ -71,9 +71,9 @@
 
     // Add a white PointLight to the scene.
     var loader = new THREE.JSONLoader();
-    loader.load( 'wood_cup.json', function(geometry){
-      var material = new THREE.MeshLambertMaterial({color: 0x55B663});
-      mesh = new THREE.Mesh( geometry, material);
+    loader.load( 'wood_cup.json', function(geometry, materials){
+      //var material = new THREE.MeshLambertMaterial({color: 0x55B663});
+      mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial(materials));
       scene.add(mesh);
     });
 
