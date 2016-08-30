@@ -8,6 +8,10 @@
   color: #fff;
 }
 
+html {
+  overflow: hidden;
+}
+
 body {
   font-family: 'Source Code Pro', monospace;
   color: #222;
