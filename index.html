@@ -74,6 +74,7 @@
     loader.load( 'wood_cup.json', function(geometry, materials){
       //var material = new THREE.MeshLambertMaterial({color: 0x55B663});
       mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial(materials));
+      mesh.rotation.set('45deg');
       scene.add(mesh);
     });
 
