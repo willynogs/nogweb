@@ -10,7 +10,7 @@ $(function(){
     $('.menu-3').toggleClass('menu-3-collapse');
 
     if($('.overlay-menu').hasClass('overlay-menu-active')) {
-        $('.overlay-menu').hide().toggleClass('overlay-menu-active');
+        $('.overlay-menu').fadeOut(200).toggleClass('overlay-menu-active');
     } else {
       $('.overlay-menu').show().toggleClass('overlay-menu-active');
     }
