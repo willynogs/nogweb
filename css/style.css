@@ -271,6 +271,29 @@ body {
   margin-left: 15px;
 }
 
+.click-circle {
+  height: 10px;
+  width: 10px;
+  background-color: pink;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 500;
+  /*
+  animation: 2s grow forwards;
+  */
+}
+
+@keyframes grow {
+  from {
+    height: 10px;
+    width: 10px;
+  }
+  to {
+    height: 100px;
+    width: 100px;
+  }
+}
+
 @media (max-width: 550px) {
   .page-title {
     display: block;

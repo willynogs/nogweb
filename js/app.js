@@ -23,4 +23,16 @@ $(function(){
 
     $('.overlay-contact').toggleClass('overlay-fade-left');
   });
+
+  $('.overlay-link').click(function(){
+    var x = event.pageX - 5;
+    var y = event.pageY - 5;
+    $('body').append("<div class='click-circle' style='top:" + y + "px;left:" + x + "px;' data-top='" + y + "px' data-left='" + x + "px'></div>");
+    $('.click-circle').animate({
+      height: "200px",
+      width: "200px",
+      top: (y - 100) + "px",
+      left: (x - 100) + "px"
+    }, 1000);
+  });
 });
