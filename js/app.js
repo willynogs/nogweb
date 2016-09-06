@@ -25,7 +25,7 @@ $(function(){
     $('.overlay-contact').toggleClass('overlay-fade-left');
   });
 
-  $('.overlay-link').click(function(){
+  $('.overlay-link').click(function(event){
     var x = event.pageX - 5;
     var y = event.pageY - 5;
     var pageHeight = $(window).height();
