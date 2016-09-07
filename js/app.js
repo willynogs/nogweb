@@ -25,7 +25,9 @@ $(function(){
     $('.overlay-contact').toggleClass('overlay-fade-left');
   });
 
+  //NAVIGATION
   $('.overlay-link').click(function(event){
+    var parentLink = $(this);
     var x = event.pageX - 5;
     var y = event.pageY - 5;
     var pageHeight = $(window).height();
@@ -34,10 +36,8 @@ $(function(){
     var r = 200;
     //CIRCLE RADIUS SHOULD BE EQUAL TO FARTHEST DIAGONAL FROM CENTER
     if ((pageWidth / 2) > x) {
-      console.log("first half");
       d = (Math.sqrt((Math.pow((pageWidth - x), 2) + Math.pow((pageHeight / 2), 2))) * 2);
     } else {
-      console.log("second half");
       var newX = pageWidth - x;
       var newY = pageHeight - y;
       d = (Math.sqrt((Math.pow((pageWidth - newX), 2) + Math.pow((pageHeight / 2), 2))) * 2) + 50;
@@ -49,6 +49,7 @@ $(function(){
       top: (y - (d / 2)) + "px",
       left: (x - (d / 2)) + "px"
     }, 800, function(){
+      //AFTER ANIMATION ENDS
       $(this).css({
         "height": "100vh",
         "width": "100vw",
@@ -56,6 +57,19 @@ $(function(){
         "left": "0px",
         "border-radius": "0"
       });
+
+      $('.click-circle').empty();
+      var html = '';
+
+      if(parentLink.hasClass('overlay-about')) {
+        html = $('.about-wrapper').html();
+      } else if(parentLink.hasClass('overlay-work')) {
+        html = $('.work-wrapper').html();
+      } else {
+        html = $('.contact-wrapper').html();
+      }
+
+      $('.click-circle').append(html);
     });
   });
 });

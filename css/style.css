@@ -277,21 +277,22 @@ body {
   background-color: #CFB19E;
   border-radius: 50%;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 4;
-  /*
-  animation: 2s grow forwards;
-  */
 }
 
-@keyframes grow {
-  from {
-    height: 10px;
-    width: 10px;
-  }
-  to {
-    height: 100px;
-    width: 100px;
-  }
+.content-container {
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  animation: 1s fadeInUp forwards;
+}
+
+.content-header {
+  font-size: 4em;
+  margin: 0;
 }
 
 @media (max-width: 550px) {
