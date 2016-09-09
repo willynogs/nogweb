@@ -314,6 +314,9 @@ body {
 
 @media (max-width: 700px) {
   .content-container {
+    text-align: center;
+  }
+  .content-container {
     width: 90vw;
   }
 }
