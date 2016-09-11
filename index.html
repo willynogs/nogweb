@@ -1,4 +1,8 @@
 <html>
+  <!--
+  SAPERE AUDE!
+  WILL NAUGLE 2016
+  -->
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro" rel="stylesheet">
@@ -62,7 +66,9 @@
     <script src="js/app.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
     <script src="http://s.cdpn.io/25480/OrbitControls.js"></script>
+    <script src="js/threex.videotexture.js"></script>
 
+    <!--
     <script>
       $(function(){
         // Set up the scene, camera, and renderer as global variables.
@@ -116,5 +122,77 @@
         }
       });
     </script>
+    -->
+
+    <script>
+	//////////////////////////////////////////////////////////////////////////////////
+	//		Init
+	//////////////////////////////////////////////////////////////////////////////////
+	// init renderer
+	var renderer	= new THREE.WebGLRenderer({
+		antialias	: true,
+	});
+	renderer.setClearColor(new THREE.Color('lightgrey'), 1)
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	$('.content').append( renderer.domElement );
+	var updateFcts	= [];
+	var scene	= new THREE.Scene();
+	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100 );
+	camera.position.z = 3;
+	//////////////////////////////////////////////////////////////////////////////////
+	//		add an object and make it move					//
+	//////////////////////////////////////////////////////////////////////////////////
+	// find out which file formats i can read
+	var canPlayMp4	= document.createElement('video').canPlayType('video/mp4') !== '' ? true : false
+	var canPlayOgg	= document.createElement('video').canPlayType('video/ogg') !== '' ? true : false
+	if( canPlayMp4 ){
+		var url	= 'videos/sintel.mp4'
+	}else if( canPlayOgg ){
+		var url	= 'videos/sintel.ogv'
+	}else	alert('cant play mp4 or ogv')
+	// create the videoTexture
+	var videoTexture= new THREEx.VideoTexture("video-bg.mp4");
+	var video	= videoTexture.video
+	updateFcts.push(function(delta, now){
+		videoTexture.update(delta, now)
+	})
+
+	// use the texture in a THREE.Mesh
+	var geometry	= new THREE.CubeGeometry(1,1,1);
+	var material	= new THREE.MeshBasicMaterial({
+		map	: videoTexture.texture
+	});
+	var mesh	= new THREE.Mesh( geometry, material );
+	scene.add( mesh );
+	updateFcts.push(function(delta, now){
+		mesh.rotation.x += 1 * delta;
+		mesh.rotation.y += 2 * delta;
+	})
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		render the scene						//
+	//////////////////////////////////////////////////////////////////////////////////
+
+	updateFcts.push(function(){
+		renderer.render( scene, camera );
+	})
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		loop runner							//
+	//////////////////////////////////////////////////////////////////////////////////
+	var lastTimeMsec= null
+	requestAnimationFrame(function animate(nowMsec){
+		// keep looping
+		requestAnimationFrame( animate );
+		// measure time
+		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+		lastTimeMsec	= nowMsec
+		// call each update function
+		updateFcts.forEach(function(updateFn){
+			updateFn(deltaMsec/1000, nowMsec/1000)
+		})
+	})
+</script>
   </body>
 </html>
