@@ -7,11 +7,11 @@
   background-color: #222; /* Gecko Browsers */
   color: #fff;
 }
-
+/*
 html {
   overflow: hidden;
 }
-
+*/
 body {
   font-family: 'Source Code Pro', monospace;
   color: #222;
@@ -312,6 +312,24 @@ a:hover {
 
 .content-body {
   font-size: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: scroll;
+}
+
+.work-item {
+  height: 20vw;
+  width: 20vw;
+  display: flex;
+  cursor: pointer;
+}
+
+.work-item span {
+  color: #fff;
+  font-size: 1.2em;
+  align-self: flex-end;
+  text-decoration: underline;
+  margin: 10px;
 }
 
 @media (max-width: 550px) {

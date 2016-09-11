@@ -1,6 +1,5 @@
 <html>
   <!--
-  SAPERE AUDE!
   WILL NAUGLE 2016
   -->
   <head>
@@ -47,8 +46,27 @@
       <div class="content-container">
         <h2 class="content-header">portfolio</h2>
         <div class="content-body">
-            Donec id elit non mi porta gravida at eget metus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec sed odio dui. Nullam id dolor id nibh ultricies vehicula ut id elit. Donec sed odio dui.
-            Etiam porta sem malesuada magna mollis euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
+          <div class="work-item">
+            <span>lorem ipsum</span>
+          </div>
+          <div class="work-item">
+            <span>lorem ipsum</span>
+          </div>
+          <div class="work-item">
+            <span>lorem ipsum</span>
+          </div>
+          <div class="work-item">
+            <span>lorem ipsum</span>
+          </div>
+          <div class="work-item">
+            <span>lorem ipsum</span>
+          </div>
+          <div class="work-item">
+            <span>lorem ipsum</span>
+          </div>
+          <div class="work-item">
+            <span>lorem ipsum</span>
+          </div>
         </div>
       </div>
     </div>
@@ -64,9 +82,57 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+    <!--
     <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
+    -->
     <script src="http://s.cdpn.io/25480/OrbitControls.js"></script>
     <script src="js/threex.videotexture.js"></script>
+
+    <script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( $('.content').width(), $('.content').height() );
+    renderer.setClearColor( 0xffffff );
+    $('.content').append( renderer.domElement );
+
+    var geometry = new THREE.BoxGeometry( 5, 5, 5 );
+    var material = new THREE.MeshBasicMaterial( { color: 0xCFB19E } );
+    var cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+    cube.rotation.x += 2.5;
+    cube.rotation.y += 2.5;
+
+    var material2 = new THREE.MeshBasicMaterial( { color: 0x222222 } );
+    var cube2 = new THREE.Mesh( geometry, material2 );
+    scene.add( cube2 );
+
+    cube2.rotation.x -= 2.5;
+    cube2.rotation.y -= 2.5;
+
+    var material3 = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+    var cube3 = new THREE.Mesh( geometry, material3 );
+    scene.add( cube3 );
+
+    camera.position.z = 10;
+
+    function render() {
+    	requestAnimationFrame( render );
+
+      cube.rotation.y += 0.02;
+
+      cube2.rotation.y -= 0.01;
+
+      cube3.rotation.y -= 0.02;
+      cube3.rotation.x -= 0.02;
+
+    	renderer.render( scene, camera );
+    }
+    render();
+    </script>
 
     <!--
     <script>
@@ -123,78 +189,68 @@
       });
     </script>
     -->
-
+    <!--
     <script>
-	//////////////////////////////////////////////////////////////////////////////////
-	//		Init
-	//////////////////////////////////////////////////////////////////////////////////
-	// init renderer
-	var renderer	= new THREE.WebGLRenderer({
-		antialias	: true,
-	});
-  /*
-	renderer.setClearColor(new THREE.Color('lightgrey'), 1)
-  */
-	renderer.setSize( $('.content').width(), $('.content').height() );
-	$('.content').append( renderer.domElement );
-	var updateFcts	= [];
-	var scene	= new THREE.Scene();
-	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100 );
-	camera.position.z = 3;
-	//////////////////////////////////////////////////////////////////////////////////
-	//		add an object and make it move					//
-	//////////////////////////////////////////////////////////////////////////////////
-	// find out which file formats i can read
-	var canPlayMp4	= document.createElement('video').canPlayType('video/mp4') !== '' ? true : false
-	var canPlayOgg	= document.createElement('video').canPlayType('video/ogg') !== '' ? true : false
-	if( canPlayMp4 ){
-		var url	= 'videos/sintel.mp4'
-	}else if( canPlayOgg ){
-		var url	= 'videos/sintel.ogv'
-	}else	alert('cant play mp4 or ogv')
-	// create the videoTexture
-	var videoTexture= new THREEx.VideoTexture("video-bg.mp4");
-	var video	= videoTexture.video
-	updateFcts.push(function(delta, now){
-		videoTexture.update(delta, now)
-	})
+    	//////////////////////////////////////////////////////////////////////////////////
+    	//		Init
+    	//////////////////////////////////////////////////////////////////////////////////
+    	// init renderer
+    	var renderer	= new THREE.WebGLRenderer({
+    		antialias	: true,
+    	});
+    	renderer.setSize( $('.content').width(), $('.content').height() );
+    	$('.content').append( renderer.domElement );
+    	var updateFcts	= [];
+    	var scene	= new THREE.Scene();
+    	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100 );
+    	camera.position.z = 3;
+    	//////////////////////////////////////////////////////////////////////////////////
+    	//		add an object and make it move					//
+    	//////////////////////////////////////////////////////////////////////////////////
+    	// create the videoTexture
+    	var videoTexture= new THREEx.VideoTexture("video-bg.mp4");
+    	var video	= videoTexture.video
+    	updateFcts.push(function(delta, now){
+    		videoTexture.update(delta, now)
+    	})
 
-	// use the texture in a THREE.Mesh
-	var geometry	= new THREE.CubeGeometry(1,1,1);
-	var material	= new THREE.MeshBasicMaterial({
-		map	: videoTexture.texture
-	});
-	var mesh	= new THREE.Mesh( geometry, material );
-	scene.add( mesh );
-	updateFcts.push(function(delta, now){
-		mesh.rotation.x += .1 * delta;
-		mesh.rotation.y += .2 * delta;
-	})
+    	// use the texture in a THREE.Mesh
+    	var geometry	= new THREE.CubeGeometry(1,1,1);
+    	var material	= new THREE.MeshBasicMaterial({
+    		map	: videoTexture.texture
+    	});
+    	var mesh	= new THREE.Mesh( geometry, material );
+    	scene.add( mesh );
+    	updateFcts.push(function(delta, now){
+    		mesh.rotation.x += .1 * delta;
+    		mesh.rotation.y += .2 * delta;
+    	})
 
-	//////////////////////////////////////////////////////////////////////////////////
-	//		render the scene						//
-	//////////////////////////////////////////////////////////////////////////////////
+    	//////////////////////////////////////////////////////////////////////////////////
+    	//		render the scene						//
+    	//////////////////////////////////////////////////////////////////////////////////
 
-	updateFcts.push(function(){
-		renderer.render( scene, camera );
-	})
+    	updateFcts.push(function(){
+    		renderer.render( scene, camera );
+    	})
 
-	//////////////////////////////////////////////////////////////////////////////////
-	//		loop runner							//
-	//////////////////////////////////////////////////////////////////////////////////
-	var lastTimeMsec= null
-	requestAnimationFrame(function animate(nowMsec){
-		// keep looping
-		requestAnimationFrame( animate );
-		// measure time
-		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
-		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
-		lastTimeMsec	= nowMsec
-		// call each update function
-		updateFcts.forEach(function(updateFn){
-			updateFn(deltaMsec/1000, nowMsec/1000)
-		})
-	})
-</script>
+    	//////////////////////////////////////////////////////////////////////////////////
+    	//		loop runner							//
+    	//////////////////////////////////////////////////////////////////////////////////
+    	var lastTimeMsec= null
+    	requestAnimationFrame(function animate(nowMsec){
+    		// keep looping
+    		requestAnimationFrame( animate );
+    		// measure time
+    		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+    		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+    		lastTimeMsec	= nowMsec
+    		// call each update function
+    		updateFcts.forEach(function(updateFn){
+    			updateFn(deltaMsec/1000, nowMsec/1000)
+    		})
+    	})
+    </script>
+  -->
   </body>
 </html>
