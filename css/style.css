@@ -312,16 +312,19 @@ a:hover {
 
 .content-body {
   font-size: 1em;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: scroll;
 }
 
 .work-item {
   height: 20vw;
   width: 20vw;
   display: flex;
+  background-color: blue;
   cursor: pointer;
+}
+
+.work-item-hover {
+  justify-content: center;
+  align-items: center;
 }
 
 .work-item span {
