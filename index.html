@@ -167,8 +167,8 @@
 	var mesh	= new THREE.Mesh( geometry, material );
 	scene.add( mesh );
 	updateFcts.push(function(delta, now){
-		mesh.rotation.x += 1 * delta;
-		mesh.rotation.y += 2 * delta;
+		mesh.rotation.x += .001 * delta;
+		mesh.rotation.y += .002 * delta;
 	})
 
 	//////////////////////////////////////////////////////////////////////////////////
