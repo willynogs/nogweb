@@ -65,7 +65,7 @@ $(function(){
         html = $('.about-wrapper').html();
       } else if(parentLink.hasClass('overlay-work')) {
         html = $('.work-wrapper').html();
-      } else {
+      } else if(parentLink.hasClass('overlay-contact')){
         html = $('.contact-wrapper').html();
       }
 
