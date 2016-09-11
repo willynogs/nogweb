@@ -132,7 +132,9 @@
 	var renderer	= new THREE.WebGLRenderer({
 		antialias	: true,
 	});
+  /*
 	renderer.setClearColor(new THREE.Color('lightgrey'), 1)
+  */
 	renderer.setSize( $('.content').width(), $('.content').height() );
 	$('.content').append( renderer.domElement );
 	var updateFcts	= [];
