@@ -314,27 +314,6 @@ a:hover {
   font-size: 1em;
 }
 
-.work-item {
-  height: 20vw;
-  width: 20vw;
-  display: flex;
-  background-color: blue;
-  cursor: pointer;
-}
-
-.work-item-hover {
-  justify-content: center;
-  align-items: center;
-}
-
-.work-item span {
-  color: #fff;
-  font-size: 1.2em;
-  align-self: flex-end;
-  text-decoration: underline;
-  margin: 10px;
-}
-
 @media (max-width: 550px) {
   .page-title {
     display: block;
