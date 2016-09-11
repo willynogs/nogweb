@@ -318,6 +318,9 @@ a:hover {
   .page-title {
     display: block;
   }
+  .content-header {
+    font-size: 3em;
+  }
 }
 
 @media (max-width: 700px) {
